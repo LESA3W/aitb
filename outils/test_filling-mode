@@ -1,0 +1,108 @@
+"""
+Script de diagnostic : teste tous les filling modes pour IC Markets
+"""
+import MetaTrader5 as mt5
+import sys
+from pathlib import Path
+
+# Ajouter le dossier parent au path
+sys.path.insert(0, str(Path(__file__).parent))
+
+from config.settings import CONFIG
+
+SYMBOL = CONFIG["SYMBOL"]
+MAGIC = CONFIG["MAGIC"]
+DEVIATION = CONFIG["DEVIATION_POINTS"]
+
+def test_all_filling_modes():
+    """Teste FOK, IOC, RETURN pour voir lequel marche"""
+    
+    if not mt5.initialize():
+        print("❌ Erreur d'initialisation MT5")
+        return
+    
+    if not mt5.symbol_select(SYMBOL, True):
+        print(f"❌ Symbole {SYMBOL} non sélectionné")
+        mt5.shutdown()
+        return
+    
+    print(f"\n🔍 Test des filling modes pour {SYMBOL}")
+    print("=" * 60)
+    
+    info = mt5.symbol_info(SYMBOL)
+    tick = mt5.symbol_info_tick(SYMBOL)
+    
+    if not tick:
+        print("❌ Impossible de récupérer le tick")
+        mt5.shutdown()
+        return
+    
+    # Requête de base
+    base_request = {
+        "action": mt5.TRADE_ACTION_DEAL,
+        "symbol": SYMBOL,
+        "volume": 0.01,  # lot minimal
+        "type": mt5.ORDER_TYPE_BUY,
+        "price": round(tick.ask, info.digits),
+        "sl": 0.0,
+        "tp": 0.0,
+        "deviation": DEVIATION,
+        "magic": MAGIC,
+        "comment": "Test filling",
+        "type_time": mt5.ORDER_TIME_GTC,
+    }
+    
+    modes = {
+        "FOK": mt5.ORDER_FILLING_FOK,
+        "IOC": mt5.ORDER_FILLING_IOC,
+        "RETURN": mt5.ORDER_FILLING_RETURN,
+    }
+    
+    working_modes = []
+    
+    for name, mode in modes.items():
+        test_req = dict(base_request)
+        test_req["type_filling"] = mode
+        
+        print(f"\n📝 Test {name} (value={mode})...")
+        
+        # Test avec order_check
+        check = mt5.order_check(test_req)
+        
+        if check is None:
+            print(f"   ❌ order_check returned None")
+            continue
+        
+        print(f"   Retcode: {check.retcode}")
+        print(f"   Comment: {getattr(check, 'comment', 'N/A')}")
+        
+        if check.retcode == mt5.TRADE_RETCODE_DONE or check.retcode == 0:
+            print(f"   ✅ {name} est ACCEPTÉ !")
+            working_modes.append(name)
+        else:
+            print(f"   ❌ {name} est REJETÉ")
+    
+    print("\n" + "=" * 60)
+    
+    if working_modes:
+        print(f"✅ Modes compatibles trouvés: {', '.join(working_modes)}")
+        print(f"\n💡 SOLUTION:")
+        print(f"   Ajoute ceci dans ton settings.py:")
+        print(f"   \"FILLING_MODE\": \"{working_modes[0]}\",")
+    else:
+        print("⚠️ AUCUN mode compatible trouvé !")
+        print("   Vérifie que:")
+        print("   1. Le compte MT5 est bien connecté")
+        print("   2. Le marché est ouvert")
+        print("   3. Le symbole est tradable")
+    
+    # Info sur le symbole
+    print(f"\n📊 Info symbole:")
+    print(f"   Filling mode préféré: {info.filling_mode}")
+    print(f"   Trade mode: {info.trade_mode}")
+    print(f"   Volume min: {info.volume_min}")
+    
+    mt5.shutdown()
+
+if __name__ == "__main__":
+    test_all_filling_modes()

@@ -1,0 +1,11 @@
+import MetaTrader5 as mt5
+
+mt5.initialize()
+account = mt5.account_info()
+
+print(f"🔥 TON LEVIER : 1:{account.leverage}")
+print(f"Balance : {account.balance}")
+print(f"Marge utilisée : {account.margin}")
+print(f"Marge libre : {account.margin_free}")
+
+mt5.shutdown()

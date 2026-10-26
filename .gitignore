@@ -1,0 +1,31 @@
+# secrets, jamais versionnes
+.env
+.env.*
+!.env.example
+keys.env
+keys.txt
+*secret*
+*jeton*
+jeton_envoi.txt
+jeton_envoi_crypto.txt
+
+# environnement
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# sorties et donnees locales
+logs/
+*.log
+screenshots/
+data/
+perf.csv
+context.jsonl
+debug_bbox*.png
+.chrome_profile*/
+
+# sauvegardes de configuration
+*.bak
+*.bak-*
+settings.py.bak*

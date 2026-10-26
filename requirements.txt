@@ -1,0 +1,7 @@
+pytesseract
+pillow
+pyautogui
+pywin32
+schedule
+tqdm
+pytz

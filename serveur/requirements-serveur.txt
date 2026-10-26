@@ -1,0 +1,44 @@
+# Dependances REELLES du bot.
+#
+# Deduites du graphe d'imports suivi TRANSITIVEMENT depuis les vrais
+# points d'entree : aitb/live.py, aitb/watchdog.py, aitb/preflight.py,
+# dashboard.py, dashboard_crypto.py.
+# 23 modules locaux atteints, 4 paquets tiers seulement.
+#
+# Qui importe quoi, verifie :
+#   MetaTrader5 <- live, watchdog, preflight, trade_manager, risk_manager,
+#                  market_data, filters, logger, monitor, dashboard
+#   numpy       <- live, market_data, strategies, indicators, arb_bot, arb_eu
+#   psutil      <- watchdog
+#   pytz        <- filters
+#
+# POURQUOI PAS LES 39 DU VENV D'ORIGINE
+# --------------------------------------
+# Le venv historique contenait 39 paquets. Les 35 autres viennent de
+# l'architecture macro + OCR + ChatGPT abandonnee le 2026-09-10 :
+# openai, pytesseract, PyAutoGUI, PyGetWindow, PyScreeze, MouseInfo,
+# beautifulsoup4, pillow, pydantic, httpx... Aucun n'est importe par le
+# bot headless. Les installer sur une machine qui tient un compte de
+# trading serait de la surface d'attaque gratuite.
+#
+# A ne PAS installer non plus : "metatrader==0.0.1", present dans le
+# venv d'origine, distinct de MetaTrader5, atteint par aucun import.
+# ===================================================================
+# PYTHON 3.12 OBLIGATOIRE, en 64 bits.
+#
+# MetaTrader5 est distribue en roues compilees PAR version de Python.
+# Le 2026-09-14, sur un serveur en Python 3.14.2, pip a repondu :
+#   "Could not find a version that satisfies the requirement
+#    MetaTrader5==5.0.5260 (from versions: 5.0.5488 ... 5.0.6180)"
+# Ce numero n'existe simplement pas pour 3.14.
+#
+# Tentation a eviter : prendre une version plus recente pour coller a
+# 3.14. Ca changerait DEUX variables a la fois, l'interpreteur et
+# l'API du broker (pres de 1000 numeros de build d'ecart), sur la
+# machine qui tient l'evaluation. Le bot est valide sur 3.12.10 avec
+# exactement ces quatre versions. On reproduit, on n'improvise pas.
+# ===================================================================
+MetaTrader5==5.0.5260
+numpy==2.3.3
+psutil==7.1.0
+pytz==2025.2

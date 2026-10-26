@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A.I.T.B | Trading Dashboard</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-primary: #0a0d14;
+  --bg-secondary: #0f1419;
+  --bg-card: #151b26;
+  --bg-hover: #1a2332;
+  --border: #1f2937;
+  --border-light: #374151;
+  --text-primary: #f9fafb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --green: #10b981;
+  --green-bg: rgba(16, 185, 129, 0.1);
+  --red: #ef4444;
+  --red-bg: rgba(239, 68, 68, 0.1);
+  --blue: #3b82f6;
+  --blue-bg: rgba(59, 130, 246, 0.1);
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 80px;
+}
+
+.container {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brand h1 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--blue) 0%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand .date-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 4px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.last-update {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.stat-change {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.positive { color: var(--green); }
+.negative { color: var(--red); }
+
+.table-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.table-wrapper {
+  overflow-y: auto;
+  max-height: 600px;
+}
+
+.horizontal-scroll {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: var(--bg-secondary);
+  border-top: 2px solid var(--border);
+  overflow-x: auto;
+  overflow-y: hidden;
+  z-index: 1000;
+  padding: 0 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 2000px;
+}
+
+thead {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+th {
+  padding: 16px 12px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+th.tp-col, td.tp-col { width: 50px; min-width: 50px; max-width: 50px; }
+th.sl-col, td.sl-col { width: 50px; min-width: 50px; max-width: 50px; }
+
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+tbody tr:hover {
+  background: var(--bg-hover);
+}
+
+td {
+  padding: 16px 12px;
+  font-size: 13px;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.badge-cycle {
+  background: var(--blue-bg);
+  color: var(--blue);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.badge-decision {
+  background: rgba(156, 163, 175, 0.1);
+  color: var(--text-primary);
+  border: 1px solid rgba(156, 163, 175, 0.2);
+}
+
+.badge-ticket {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status-open {
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-closed {
+  background: var(--red-bg);
+  color: var(--red);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.side-buy { color: var(--green); font-weight: 700; }
+.side-sell { color: var(--red); font-weight: 700; }
+
+.pnl-positive { color: var(--green); font-weight: 700; }
+.pnl-negative { color: var(--red); font-weight: 700; }
+
+.sl-value, .tp-value { color: var(--text-primary); font-weight: 700; }
+.sl-hit { color: var(--red) !important; font-weight: 700; }
+.tp-hit { color: var(--blue) !important; font-weight: 700; }
+
+.time-cell { color: var(--text-muted); font-size: 11px; }
+
+.screenshots {
+  color: var(--text-muted);
+  font-size: 10px;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand">
+      <h1>A.I.T.B Trading Dashboard</h1>
+      <div class="date-badge" id="currentDate">📅 Loading...</div>
+    </div>
+    <div class="header-meta">
+      <div class="status-indicator">
+        <div class="pulse"></div>
+        <span style="font-size: 13px;">Live</span>
+      </div>
+      <div class="last-update" id="lastUpdate">Last Update: --</div>
+    </div>
+  </div>
+
+  <div class="nav-container">
+    <button class="nav-btn" id="prevBtn" onclick="navigateDay(-1)">← </button>
+    <div class="date-badge" id="navDate" style="font-size: 14px; padding: 8px 20px;">📅 Loading...</div>
+    <button class="nav-btn" id="nextBtn" onclick="navigateDay(1)"> →</button>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Total P&L</div>
+      <div class="stat-value" id="totalPnl">$0.00</div>
+      <div class="stat-change" id="totalPnlPct">↑ 0.0%</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-label">Win Rate (PERF)</div>
+      <div class="stat-value positive" id="winRate">0.0%</div>
+      <div class="stat-change positive" id="winStats">↑ 0/0 Trades</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-label">Active Positions</div>
+      <div class="stat-value" style="color: var(--blue);" id="activePos">0</div>
+      <div class="stat-change" style="color: var(--text-muted);" id="activeDetail">0 BUY · 0 SELL</div>
+    </div>
+    
+    <div class="stat-card">
+      <div class="stat-label">Best Trade</div>
+      <div class="stat-value positive" id="bestTrade">+$0.00</div>
+      <div class="stat-change" style="color: var(--text-muted);" id="bestPips">+0.0 pips</div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Cycle</th><th>Ticket</th><th>Decision</th><th>Status</th><th>Symbol</th><th>Side</th><th>Vol</th>
+            <th>Entry</th><th>Current</th><th>Exit</th><th>P&L $</th><th>P&L pips</th>
+            <th>Entry Time</th><th>Exit Time</th>
+            <th class="sl-col">SL</th><th class="tp-col">TP1</th><th class="tp-col">TP2</th><th class="tp-col">TP3</th>
+            <th>Screenshots</th>
+          </tr>
+        </thead>
+        <tbody id="tradesTable">
+          <tr><td colspan="19" style="text-align: center; padding: 40px;">Loading trades...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="horizontal-scroll">
+</div>
+
+<script>
+// ✅ Configuration
+const availableDates = ["2026-09-12"];
+let currentDateIndex = availableDates.length - 1; // Dernier jour par défaut
+
+// ✅ Cache des données inline (pour éviter CORS sur file://)
+const inlineDataCache = {"2026-09-12": {"dashboard_stats": {"total_pnl_usd": 10.88, "total_pnl_pct": 1.09, "win_rate": 71.4, "total_trades": 7, "winning_trades": 5, "losing_trades": 2, "active_positions": 1, "active_buy": 0, "active_sell": 1, "best_trade_usd": 4.8, "best_trade_pips": 12.0, "worst_trade_usd": -2.4, "worst_trade_pips": -6.0, "total_volume": 0.32, "profit_factor": 3.27, "last_update": "12/09/26 - 17:35:10"}, "10000000001": {"position_ticket": "10000000001", "order_id": "10000000001", "status": "CLOSED", "time_entry": "2026-09-12T08:15:02", "time_exit": "2026-09-12T08:41:17", "duration_sec": "", "side": "BUY", "volume": "0.04", "entry_price": "1.15802", "current_price": "1.15874", "exit_price": "1.15874", "sl": "1.15742", "tp1": "1.15862", "tp2": "1.15902", "tp3": "1.15942", "sl_hit": "0", "tp1_hit": "1", "tp2_hit": "0", "tp3_hit": "0", "pnl_usd": "2.88", "pnl_eur": "", "pnl_pips": "7.2", "rr_ratio": "", "drawdown_pips": "", "equity_before": "", "equity_after": "", "commission_usd": "", "swap_usd": "", "symbol": "EURUSD", "session": "LONDON", "trend_context": "", "cycle_ts": "", "screenshots": "", "notes": "", "spread_pips": "0.2", "cycle_number": "1", "decision": "BUY"}, "10000000002": {"position_ticket": "10000000002", "order_id": "10000000002", "status": "CLOSED", "time_entry": "2026-09-12T09:02:44", "time_exit": "2026-09-12T09:28:03", "duration_sec": "", "side": "SELL", "volume": "0.04", "entry_price": "1.15931", "current_price": "1.15871", "exit_price": "1.15871", "sl": "1.15991", "tp1": "1.15871", "tp2": "1.15831", "tp3": "1.15791", "sl_hit": "0", "tp1_hit": "1", "tp2_hit": "1", "tp3_hit": "0", "pnl_usd": "2.4", "pnl_eur": "", "pnl_pips": "6.0", "rr_ratio": "", "drawdown_pips": "", "equity_before": "", "equity_after": "", "commission_usd": "", "swap_usd": "", "symbol": "EURUSD", "session": "LONDON", "trend_context": "", "cycle_ts": "", "screenshots": "", "notes": "", "spread_pips": "0.2", "cycle_number": "2", "decision": "SELL"}, "10000000003": {"position_ticket": "10000000003", "order_id": "10000000003", "status": "CLOSED", "time_entry": "2026-09-12T10:10:31", "time_exit": "2026-09-12T10:22:58", "duration_sec": "", "side": "BUY", "volume": "0.04", "entry_price": "1.15866", "current_price": "1.15806", "exit_price": "1.15806", "sl": "1.15806", "tp1": "1.15926", "tp2": "1.15966", "tp3": "1.16006", "sl_hit": "1", "tp1_hit": "0", "tp2_hit": "0", "tp3_hit": "0", "pnl_usd": "-2.4", "pnl_eur": "", "pnl_pips": "-6.0", "rr_ratio": "", "drawdown_pips": "", "equity_before": "", "equity_after": "", "commission_usd": "", "swap_usd": "", "symbol": "EURUSD", "session": "LONDON", "trend_context": "", "cycle_ts": "", "screenshots": "", "notes": "", "spread_pips": "0.2", "cycle_number": "3", "decision": "BUY"}, "10000000004": {"position_ticket": "10000000004", "order_id": "10000000004", "status": "CLOSED", "time_entry": "2026-09-12T11:33:12", "time_exit": "2026-09-12T12:15:40", "duration_sec": "", "side": "BUY", "volume": "0.04", "entry_price": "1.15774", "current_price": "1.15894", "exit_price": "1.15894", "sl": "1.15714", "tp1": "1.15834", "tp2": "1.15874", "tp3": "1.15914", "sl_hit": "0", "tp1_hit": "1", "tp2_hit": "1", "tp3_hit": "1", "pnl_usd": "4.8", "pnl_eur": "", "pnl_pips": "12.0", "rr_ratio": "", "drawdown_pips": "", "equity_before": "", "equity_after": "", "commission_usd": "", "swap_usd": "", "symbol": "EURUSD", "session": "LONDON", "trend_context": "", "cycle_ts": "", "screenshots": "", "notes": "", "spread_pips": "0.2", "cycle_number": "4", "decision": "BUY"}, "10000000005": {"position_ticket": "10000000005", "order_id": "10000000005", "status": "CLOSED", "time_entry": "2026-09-12T13:05:19", "time_exit": "2026-09-12T13:30:55", "duration_sec": "", "side": "SELL", "volume": "0.04", "entry_price": "1.16012", "current_price": "1.15952", "exit_price": "1.15952", "sl": "1.16072", "tp1": "1.15952", "tp2": "1.15912", "tp3": "1.15872", "sl_hit": "0", "tp1_hit": "1", "tp2_hit": "0", "tp3_hit": "0", "pnl_usd": "2.4", "pnl_eur": "", "pnl_pips": "6.0", "rr_ratio": "", "drawdown_pips": "", "equity_before": "", "equity_after": "", "commission_usd": "", "swap_usd": "", "symbol": "EURUSD", "session": "LONDON", "trend_context": "", "cycle_ts": "", "screenshots": "", "notes": "", "spread_pips": "0.2", "cycle_number": "5", "decision": "SELL"}, "10000000006": {"position_ticket": "10000000006", "order_id": "10000000006", "status": "CLOSED", "time_entry": "2026-09-12T14:12:07", "time_exit": "2026-09-12T14:26:31", "duration_sec": "", "side": "SELL", "volume": "0.04", "entry_price": "1.15988", "current_price": "1.16048", "exit_price": "1.16048", "sl": "1.16048", "tp1": "1.15928", "tp2": "1.15888", "tp3": "1.15848", "sl_hit": "1", "tp1_hit": "0", "tp2_hit": "0", "tp3_hit": "0", "pnl_usd": "-2.4", "pnl_eur": "", "pnl_pips": "-6.0", "rr_ratio": "", "drawdown_pips": "", "equity_before": "", "equity_after": "", "commission_usd": "", "swap_usd": "", "symbol": "EURUSD", "session": "LONDON", "trend_context": "", "cycle_ts": "", "screenshots": "", "notes": "", "spread_pips": "0.2", "cycle_number": "6", "decision": "SELL"}, "10000000007": {"position_ticket": "10000000007", "order_id": "10000000007", "status": "CLOSED", "time_entry": "2026-09-12T15:40:22", "time_exit": "2026-09-12T16:18:09", "duration_sec": "", "side": "BUY", "volume": "0.04", "entry_price": "1.15902", "current_price": "1.15982", "exit_price": "1.15982", "sl": "1.15842", "tp1": "1.15962", "tp2": "1.16002", "tp3": "1.16042", "sl_hit": "0", "tp1_hit": "1", "tp2_hit": "1", "tp3_hit": "0", "pnl_usd": "3.2", "pnl_eur": "", "pnl_pips": "8.0", "rr_ratio": "", "drawdown_pips": "", "equity_before": "", "equity_after": "", "commission_usd": "", "swap_usd": "", "symbol": "EURUSD", "session": "LONDON", "trend_context": "", "cycle_ts": "", "screenshots": "", "notes": "", "spread_pips": "0.2", "cycle_number": "7", "decision": "BUY"}, "10000000008": {"position_ticket": "10000000008", "order_id": "10000000008", "status": "OPEN", "time_entry": "2026-09-12T17:04:55", "time_exit": "", "duration_sec": "", "side": "SELL", "volume": "0.04", "entry_price": "1.16089", "current_price": "1.16042", "exit_price": "", "sl": "1.16149", "tp1": "1.16029", "tp2": "1.15989", "tp3": "1.15949", "sl_hit": "0", "tp1_hit": "1", "tp2_hit": "0", "tp3_hit": "0", "pnl_usd": "", "pnl_eur": "", "pnl_pips": "", "rr_ratio": "", "drawdown_pips": "", "equity_before": "", "equity_after": "", "commission_usd": "", "swap_usd": "", "symbol": "EURUSD", "session": "LONDON", "trend_context": "", "cycle_ts": "", "screenshots": "", "notes": "", "spread_pips": "0.2", "cycle_number": "8", "decision": "SELL"}}};
+
+// ✅ Charger les trades pour une date
+async function loadTradesForDate(dateStr) {
+  // D'abord, vérifier si on a les données en cache inline
+  if (inlineDataCache[dateStr]) {
+    console.log(`✅ Données chargées depuis le cache inline pour ${dateStr}`);
+    return inlineDataCache[dateStr];
+  }
+  
+  try {
+    // Essayer d'abord le chemin relatif (dans le même dossier que le HTML)
+    let response = await fetch(`trade_logs_${dateStr}.json`);
+    
+    // Si échec, essayer avec le chemin absolu depuis la racine
+    if (!response.ok) {
+      response = await fetch(`logs/trade_logs_${dateStr}.json`);
+    }
+    
+    if (!response.ok) {
+      console.error(`Fichier trade_logs_${dateStr}.json introuvable`);
+      return null;
+    }
+    
+    const data = await response.json();
+    console.log(`✅ Données chargées depuis le fichier pour ${dateStr}:`, data);
+    
+    // Mettre en cache
+    inlineDataCache[dateStr] = data;
+    return data;
+  } catch (error) {
+    console.error('Erreur chargement JSON:', error);
+    console.warn('💡 Astuce: Si vous ouvrez le HTML avec file://, lancez plutôt un serveur HTTP local');
+    console.warn('💡 Commande: cd logs && python -m http.server 8000');
+    return null;
+  }
+}
+
+// ✅ Mettre à jour le dashboard
+function updateDashboard(data) {
+  console.log('📊 Mise à jour dashboard avec:', data);
+  
+  if (!data) {
+    console.warn('⚠️ Aucune donnée reçue');
+    document.getElementById('tradesTable').innerHTML = '<tr><td colspan="19" style="text-align: center; padding: 40px;">No data available</td></tr>';
+    return;
+  }
+
+  const stats = data.dashboard_stats || {};
+  const trades = Object.values(data).filter(item => typeof item === 'object' && item.position_ticket);
+  
+  console.log(`📈 Stats trouvées:`, stats);
+  console.log(`📝 Nombre de trades: ${trades.length}`);
+
+  // ✅ Mise à jour des stats
+  const totalPnl = stats.total_pnl_usd || 0;
+  document.getElementById('totalPnl').textContent = `${totalPnl >= 0 ? '+' : ''}${totalPnl.toFixed(2)}`;
+  document.getElementById('totalPnl').className = `stat-value ${totalPnl >= 0 ? 'positive' : 'negative'}`;
+  document.getElementById('totalPnlPct').textContent = `↑ ${Math.abs(stats.total_pnl_pct || 0).toFixed(1)}%`;
+  document.getElementById('totalPnlPct').className = `stat-change ${totalPnl >= 0 ? 'positive' : 'negative'}`;
+  
+  document.getElementById('winRate').textContent = `${(stats.win_rate || 0).toFixed(1)}%`;
+  document.getElementById('winStats').textContent = `↑ ${stats.winning_trades || 0}/${stats.total_trades || 0} Trades`;
+  
+  document.getElementById('activePos').textContent = stats.active_positions || 0;
+  document.getElementById('activeDetail').textContent = `${stats.active_buy || 0} BUY · ${stats.active_sell || 0} SELL`;
+  
+  document.getElementById('bestTrade').textContent = `+$${(stats.best_trade_usd || 0).toFixed(2)}`;
+  document.getElementById('bestPips').textContent = `+${(stats.best_trade_pips || 0).toFixed(1)} pips`;
+  
+  document.getElementById('lastUpdate').textContent = `Last Update: ${stats.last_update || 'N/A'}`;
+
+  // ✅ Mise à jour du tableau
+  const tbody = document.getElementById('tradesTable');
+  if (trades.length === 0) {
+    console.warn('⚠️ Aucun trade trouvé dans les données');
+    tbody.innerHTML = '<tr><td colspan="19" style="text-align: center; padding: 40px;">No trades for this day</td></tr>';
+    return;
+  }
+
+  console.log(`✅ Affichage de ${trades.length} trades`);
+
+  // Trier : OPEN en premier, puis par date
+  trades.sort((a, b) => {
+    if (a.status === 'OPEN' && b.status !== 'OPEN') return -1;
+    if (a.status !== 'OPEN' && b.status === 'OPEN') return 1;
+    return new Date(b.time_entry || 0) - new Date(a.time_entry || 0);
+  });
+
+  tbody.innerHTML = trades.map(trade => {
+    const slHit = trade.sl_hit === 'true';
+    const tp1Hit = trade.tp1_hit === 'true';
+    const tp2Hit = trade.tp2_hit === 'true';
+    const tp3Hit = trade.tp3_hit === 'true';
+    
+    const pnlUsd = parseFloat(trade.pnl_usd || 0);
+    const pnlPips = parseFloat(trade.pnl_pips || 0);
+    
+    const statusLower = (trade.status || '').toLowerCase();
+    const sideLower = (trade.side || '').toLowerCase();
+    
+    return `<tr>
+      <td><span class="badge badge-cycle">#${trade.cycle_number || '?'}</span></td>
+      <td><span class="badge badge-ticket mono">${trade.position_ticket}</span></td>
+      <td><span class="badge badge-decision">${trade.decision || '-'}</span></td>
+      <td><span class="status-badge status-${statusLower}"><span class="status-dot"></span>${trade.status}</span></td>
+      <td class="mono">${trade.symbol}</td>
+      <td class="side-${sideLower}">${trade.side}</td>
+      <td class="mono">${trade.volume}</td>
+      <td class="mono">${trade.entry_price}</td>
+      <td class="mono">${trade.current_price}</td>
+      <td class="mono">${trade.exit_price || '—'}</td>
+      <td class="pnl-${pnlUsd >= 0 ? 'positive' : 'negative'} mono">${trade.pnl_usd}</td>
+      <td class="pnl-${pnlPips >= 0 ? 'positive' : 'negative'} mono">${trade.pnl_pips}</td>
+      <td class="time-cell mono">${trade.time_entry}</td>
+      <td class="time-cell mono">${trade.time_exit || '—'}</td>
+      <td class="sl-col ${slHit ? 'sl-hit' : 'sl-value'} mono">${trade.sl}</td>
+      <td class="tp-col ${tp1Hit ? 'tp-hit' : 'tp-value'} mono">${trade.tp1}</td>
+      <td class="tp-col ${tp2Hit ? 'tp-hit' : 'tp-value'} mono">${trade.tp2}</td>
+      <td class="tp-col ${tp3Hit ? 'tp-hit' : 'tp-value'} mono">${trade.tp3}</td>
+      <td class="screenshots">${trade.screenshots || ''}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ✅ Navigation entre les jours
+async function navigateDay(direction) {
+  currentDateIndex += direction;
+  if (currentDateIndex < 0) currentDateIndex = 0;
+  if (currentDateIndex >= availableDates.length) currentDateIndex = availableDates.length - 1;
+  
+  await loadCurrentDay();
+  updateNavButtons();
+}
+
+// ✅ Charger le jour actuel
+async function loadCurrentDay() {
+  const dateStr = availableDates[currentDateIndex];
+  
+  // ✅ Formater la date pour l'affichage
+  const dateObj = new Date(dateStr + 'T00:00:00');
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = dateObj.toLocaleDateString('en-US', options);
+  
+  document.getElementById('currentDate').textContent = `📅 ${formattedDate}`;
+  document.getElementById('navDate').textContent = `📅 ${dateStr}`;
+  
+  const data = await loadTradesForDate(dateStr);
+  updateDashboard(data);
+}
+
+// ✅ Mettre à jour les boutons de navigation
+function updateNavButtons() {
+  document.getElementById('prevBtn').disabled = currentDateIndex === 0;
+  document.getElementById('nextBtn').disabled = currentDateIndex === availableDates.length - 1;
+}
+
+// ✅ Synchronisation du scroll
+window.addEventListener('DOMContentLoaded', function() {
+  console.log('🚀 Dashboard chargé, initialisation...');
+  console.log('📅 Dates disponibles:', availableDates);
+  
+  const tableWrapper = document.querySelector('.table-wrapper');
+  const horizontalScroll = document.querySelector('.horizontal-scroll');
+  
+  if (tableWrapper && horizontalScroll) {
+    tableWrapper.addEventListener('scroll', function() {
+      horizontalScroll.scrollLeft = tableWrapper.scrollLeft;
+    });
+    
+    horizontalScroll.addEventListener('scroll', function() {
+      tableWrapper.scrollLeft = horizontalScroll.scrollLeft;
+    });
+  }
+  
+  // Vérifier qu'il y a des dates disponibles
+  if (availableDates.length === 0) {
+    console.error('❌ Aucune date disponible !');
+    document.getElementById('tradesTable').innerHTML = '<tr><td colspan="19" style="text-align: center; padding: 40px; color: var(--red);">⚠️ No trading data available. Please ensure JSON files exist in the logs folder.</td></tr>';
+    return;
+  }
+  
+  // Charger le jour le plus récent
+  console.log(`📂 Chargement de la date: ${availableDates[currentDateIndex]}`);
+  loadCurrentDay();
+  updateNavButtons();
+});
+</script>
+</body>
+</html>
