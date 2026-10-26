@@ -1,6 +1,6 @@
-<!doctype html><html lang="fr"><head>
+<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>A.I.T.B — +29 USD</title>
+<title>A.I.T.B — +2142 USD</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23101315'/%3E%3Crect x='8' y='9' width='3' height='14' rx='1.5' fill='%234a545e'/%3E%3Crect x='14.5' y='5' width='3' height='22' rx='1.5' fill='%2300e58a'/%3E%3Crect x='21' y='12' width='3' height='11' rx='1.5' fill='%234a545e'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -287,85 +287,87 @@ body.ready .arc-fg{transition:stroke-dasharray .6s var(--out)}
       <button class="b-restart" title="Relance le bot sans fermer les positions">
         <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
              stroke-width="2.4" stroke-linecap="round"><path d="M20 11a8 8 0 1 0-.6 4"/>
-        <path d="M20 4v7h-7"/></svg>RELANCER</button></form>
+        <path d="M20 4v7h-7"/></svg>RESTART</button></form>
   </div>
   <div class="meta">
-    <span>COMPTE <b>DEMO</b></span>
+    <span>ACCOUNT <b>DEMO</b></span>
     <span>UPTIME <b id="uptime">0.0 h</b></span>
-    <span>MAJ <b id="maj">19:19:48</b></span>
+    <span>UPDATED <b id="maj">19:54:44</b></span>
   </div>
 </header>
 
 <section class="goals">
   <div class="goal j rise" style="--i:1">
     <div class="goal-body">
-      <h2><span class="ic">24H</span>Objectif du jour</h2>
-      <div class="scope">AUJOURD'HUI</div>
-      <div class="amt-row"><span class="amt num up" id="j-amt">+28.80</span><span class="goal-of">/50 USD</span></div>
-      <div class="left" id="j-left">reste 21.20 USD · +12.40 USD ouverts non comptés</div>
+      <h2><span class="ic">24H</span>Daily target</h2>
+      <div class="scope">TODAY</div>
+      <div class="amt-row"><span class="amt num up" id="j-amt">+2142.50</span><span class="goal-of">/1000 USD</span></div>
+      <div class="left" id="j-left">left 0.00 USD · +2396.30 USD floating, not counted</div>
     </div>
-    <div class="arc-wrap" id="j-arc"><svg class="arc" viewBox="0 0 132 132" width="132" height="132"><circle cx="66.0" cy="66.0" r="62.50" class="arc-bg" stroke-dasharray="294.52 999" stroke-width="7"/><circle cx="66.0" cy="66.0" r="62.50" class="arc-fg" stroke-dasharray="169.65 999" stroke-width="7"/></svg><span class="arc-pct num up" id="j-pct">58%</span></div>
+    <div class="arc-wrap" id="j-arc"><svg class="arc" viewBox="0 0 132 132" width="132" height="132"><circle cx="66.0" cy="66.0" r="62.50" class="arc-bg" stroke-dasharray="294.52 999" stroke-width="7"/><circle cx="66.0" cy="66.0" r="62.50" class="arc-fg" stroke-dasharray="294.52 999" stroke-width="7"/></svg><span class="arc-pct num up" id="j-pct">100%</span></div>
   </div>
   <div class="goal s rise" style="--i:2">
     <div class="goal-body">
-      <h2><span class="ic">7J</span>Objectif de la semaine</h2>
-      <div class="scope">LUNDI &rarr; VENDREDI</div>
-      <div class="amt-row"><span class="amt num up" id="s-amt">+28.80</span><span class="goal-of">/250 USD</span></div>
-      <div class="left" id="s-left">5 trades clôturés · seuil mini 175 USD</div>
+      <h2><span class="ic">7D</span>Weekly target</h2>
+      <div class="scope">MONDAY &rarr; FRIDAY</div>
+      <div class="amt-row"><span class="amt num up" id="s-amt">+2142.50</span><span class="goal-of">/5000 USD</span></div>
+      <div class="left" id="s-left">6 closed trades · minimum bar 3500 USD</div>
     </div>
-    <div class="arc-wrap" id="s-arc"><svg class="arc" viewBox="0 0 132 132" width="132" height="132"><circle cx="66.0" cy="66.0" r="62.50" class="arc-bg" stroke-dasharray="294.52 999" stroke-width="7"/><circle cx="66.0" cy="66.0" r="62.50" class="arc-fg" stroke-dasharray="33.93 999" stroke-width="7"/></svg><span class="arc-pct num up" id="s-pct">12%</span></div>
+    <div class="arc-wrap" id="s-arc"><svg class="arc" viewBox="0 0 132 132" width="132" height="132"><circle cx="66.0" cy="66.0" r="62.50" class="arc-bg" stroke-dasharray="294.52 999" stroke-width="7"/><circle cx="66.0" cy="66.0" r="62.50" class="arc-fg" stroke-dasharray="126.20 999" stroke-width="7"/></svg><span class="arc-pct num up" id="s-pct">43%</span></div>
   </div>
 </section>
 
 <section class="kpis">
-  <div class="kpi rise" style="--i:3"><span>SOLDE</span><b class="num" id="balance">1,000.00</b></div>
-  <div class="kpi rise" style="--i:4"><span>POSITIONS OUVERTES</span>
-    <b class="num up" id="flottant">+12.40</b></div>
-  <div class="kpi rise" style="--i:5"><span>TOTAL</span><b class="num" id="equity">1,012.40</b></div>
-  <div class="kpi rise" style="--i:6"><span>TRADES FERMÉS</span><b class="num" id="nb">5</b></div>
+  <div class="kpi rise" style="--i:3"><span>BALANCE</span><b class="num" id="balance">52,480.00</b></div>
+  <div class="kpi rise" style="--i:4"><span>OPEN POSITIONS</span>
+    <b class="num up" id="flottant">+2396.30</b></div>
+  <div class="kpi rise" style="--i:5"><span>EQUITY</span><b class="num" id="equity">54,876.30</b></div>
+  <div class="kpi rise" style="--i:6"><span>CLOSED TRADES</span><b class="num" id="nb">6</b></div>
 </section>
 
 <section class="ledger rise" style="--i:6">
   <div class="led-head">
-    <h3>COÛT RÉEL DU PROJET</h3>
-    <em>tout ce qui sort, tout ce qui rentre — pas seulement les payouts</em>
+    <h3>TRUE COST OF THE PROJECT</h3>
+    <em>everything out, everything in — not just the payouts</em>
   </div>
   <div class="led-grid">
-    <div class="led-cell"><span>SORTIES</span><b class="num down" id="led-out">180.00</b></div>
-    <div class="led-cell"><span>ENTRÉES</span><b class="num up" id="led-in">180.00</b></div>
-    <div class="led-cell big"><span>NET RÉEL</span>
+    <div class="led-cell"><span>MONEY OUT</span><b class="num down" id="led-out">1,840.00</b></div>
+    <div class="led-cell"><span>MONEY IN</span><b class="num up" id="led-in">1,840.00</b></div>
+    <div class="led-cell big"><span>TRUE NET</span>
       <b class="num flat" id="led-net">+0.00</b></div>
-    <div class="led-cell"><span>TRACK RECORD</span><b class="num" id="led-tr">42 j / 120</b>
-      <div class="led-track"><i style="width:46%"></i></div></div>
+    <div class="led-cell"><span>TRACK RECORD</span><b class="num" id="led-tr">42 d / 120</b>
+      <div class="led-track"><i style="width:35%"></i></div></div>
   </div>
 </section>
 
 <section class="propfirm rise" style="--i:7">
-  <div class="pf-title"><h3>MARGE PROP FIRM</h3>
-    <em>ce qui tue un compte n'est pas de rater une cible, c'est de toucher une limite</em></div>
-  <div id="pf"><div class="pf-head"><span class="pf-badge ok">DANS LES CLOUS</span><em>la limite journalière est celle qui mord</em></div><div class="pf-grid"><div class="pf-cell"><span>MARGE DU JOUR</span><b class="num">3,850</b><div class="pf-track"><i class="ok" style="width:23%"></i></div><em>23% consommé · plancher 76,150</em></div><div class="pf-cell"><span>MARGE TOTALE</span><b class="num">7,210</b><div class="pf-track"><i class="ok" style="width:12%"></i></div><em>12% consommé · plancher 72,000</em></div><div class="pf-cell"><span>ARRÊT DES ENTRÉES À</span><b class="num dim">70%</b><em>de la limite consommée</em></div><div class="pf-cell"><span>FERMETURE FORCÉE À</span><b class="num dim">90%</b><em>de la limite consommée</em></div></div></div>
+  <div class="pf-title"><h3>PROP FIRM HEADROOM</h3>
+    <em>what kills an account is not missing a target, it is hitting a limit</em></div>
+  <div id="pf"><div class="pf-head"><span class="pf-badge ok">WITHIN LIMITS</span><em>the daily limit is the binding one</em></div><div class="pf-grid"><div class="pf-cell"><span>DAILY HEADROOM</span><b class="num">3,850</b><div class="pf-track"><i class="ok" style="width:23%"></i></div><em>23% used · floor 76,150</em></div><div class="pf-cell"><span>OVERALL HEADROOM</span><b class="num">7,210</b><div class="pf-track"><i class="ok" style="width:12%"></i></div><em>12% used · floor 72,000</em></div><div class="pf-cell"><span>STOP NEW ENTRIES AT</span><b class="num dim">70%</b><em>of the limit used</em></div><div class="pf-cell"><span>FORCED CLOSE AT</span><b class="num dim">90%</b><em>of the limit used</em></div></div></div>
 </section>
 
 <nav class="weeknav rise" style="--i:7">
-  <a href="/?s=-1" class="nav-btn">&larr; Précédente</a>
-  <b>26/10 — 30/10/2026<span class="tag-now">EN COURS</span></b>
-  <span class="nav-btn off">Suivante &rarr;</span>
+  <a href="/?s=-1" class="nav-btn">&larr; Previous</a>
+  <b>26/10 — 30/10/2026<span class="tag-now">CURRENT</span></b>
+  <span class="nav-btn off">Next &rarr;</span>
 </nav>
 
 <section class="grid">
-  <div class="panel"><h3>POSITIONS <em id="nb-pos">1 ouverte(s)</em></h3><div id="positions"><article class="pos rise" style="--i:0"><header><div class="pos-id"><span class="tag sell">VENTE</span><b>EURUSD</b><span class="vol">0.04 lot</span></div><div class="pos-pl up">+1.88</div></header><div class="pos-track"><div class="pos-fill up" style="--w:33.6%;width:33.6%"></div></div><footer><span>1.16089 <i>&rarr;</i> 1.16042</span><span class="up">+5 pips</span><span class="muted">cible 14 · stop 6</span></footer></article></div></div>
-  <div class="panel"><h3>PAR JOUR <em>clique un jour</em></h3>
-    <div class="days" id="jours"><button type="button" class="day today  rise" style="--i:0" data-day="0"><div class="day-val up">+29</div><div class="day-col"><div class="day-goal" style="--h:100%"></div><div class="day-bar up" style="--h:58%;height:58%"></div></div><div class="day-lab"><b>LUN</b><span>26/10</span></div></button><button type="button" class="day  ahead rise" style="--i:1" data-day="1"><div class="day-val flat"></div><div class="day-col"><div class="day-goal" style="--h:100%"></div><div class="day-bar flat" style="--h:0%;height:0%"></div></div><div class="day-lab"><b>MAR</b><span>27/10</span></div></button><button type="button" class="day  ahead rise" style="--i:2" data-day="2"><div class="day-val flat"></div><div class="day-col"><div class="day-goal" style="--h:100%"></div><div class="day-bar flat" style="--h:0%;height:0%"></div></div><div class="day-lab"><b>MER</b><span>28/10</span></div></button><button type="button" class="day  ahead rise" style="--i:3" data-day="3"><div class="day-val flat"></div><div class="day-col"><div class="day-goal" style="--h:100%"></div><div class="day-bar flat" style="--h:0%;height:0%"></div></div><div class="day-lab"><b>JEU</b><span>29/10</span></div></button><button type="button" class="day  ahead rise" style="--i:4" data-day="4"><div class="day-val flat"></div><div class="day-col"><div class="day-goal" style="--h:100%"></div><div class="day-bar flat" style="--h:0%;height:0%"></div></div><div class="day-lab"><b>VEN</b><span>30/10</span></div></button></div>
-    <div class="dd-wrap" id="jdetail"><div class="dd" data-dd="0" hidden><div class="dd-head"><b>LUNDI 26/10</b><span class="dd-amt num up">+28.80 USD</span></div><div class="dd-sub">5 clôturés · 4 gagnants · 1 perdant · objectif 50 USD</div><ul class="dd-list"><li><span class="muted">17:11</span><b>EURUSD</b><span class="up">+6.20</span></li><li><span class="muted">15:37</span><b>EURUSD</b><span class="up">+9.10</span></li><li><span class="muted">13:28</span><b>EURUSD</b><span class="up">+16.40</span></li><li><span class="muted">11:49</span><b>EURUSD</b><span class="down">-9.10</span></li><li><span class="muted">09:35</span><b>EURUSD</b><span class="up">+6.20</span></li></ul></div><div class="dd" data-dd="1" hidden><div class="dd-head"><b>MARDI 27/10</b><span class="dd-amt num flat">&mdash;</span></div><div class="dd-sub">jour à venir</div></div><div class="dd" data-dd="2" hidden><div class="dd-head"><b>MERCREDI 28/10</b><span class="dd-amt num flat">&mdash;</span></div><div class="dd-sub">jour à venir</div></div><div class="dd" data-dd="3" hidden><div class="dd-head"><b>JEUDI 29/10</b><span class="dd-amt num flat">&mdash;</span></div><div class="dd-sub">jour à venir</div></div><div class="dd" data-dd="4" hidden><div class="dd-head"><b>VENDREDI 30/10</b><span class="dd-amt num flat">&mdash;</span></div><div class="dd-sub">jour à venir</div></div></div></div>
+  <div class="panel"><h3>POSITIONS <em id="nb-pos">2 open</em></h3><div id="positions"><article class="pos rise" style="--i:0"><header><div class="pos-id"><span class="tag buy">BUY</span><b>EURUSD</b><span class="vol">1.5 lots</span></div><div class="pos-pl up">+1642.50</div></header><div class="pos-track"><div class="pos-fill up" style="--w:100.0%;width:100.0%"></div></div><footer><span>1.15802 <i>&rarr;</i> 1.16021</span><span class="up">+22 pips</span><span class="muted">target 14 · stop 6</span></footer></article><article class="pos rise" style="--i:1"><header><div class="pos-id"><span class="tag buy">BUY</span><b>XAUUSD</b><span class="vol">0.4 lots</span></div><div class="pos-pl down">-101.20</div></header><div class="pos-track"><div class="pos-fill down" style="--w:0.0%;width:0.0%"></div></div><footer><span>3412.65 <i>&rarr;</i> 3410.12</span><span class="down">-25 pips</span><span class="muted">target 158 · stop 78</span></footer></article></div></div>
+  <div class="panel"><h3>BY DAY <em>click a day</em></h3>
+    <div class="days" id="jours"><button type="button" class="day today  rise" style="--i:0" data-day="0"><div class="day-val up">+2142</div><div class="day-col"><div class="day-goal" style="--h:47%"></div><div class="day-bar up" style="--h:100%;height:100%"></div></div><div class="day-lab"><b>MON</b><span>26/10</span></div></button><button type="button" class="day  ahead rise" style="--i:1" data-day="1"><div class="day-val flat"></div><div class="day-col"><div class="day-goal" style="--h:47%"></div><div class="day-bar flat" style="--h:0%;height:0%"></div></div><div class="day-lab"><b>TUE</b><span>27/10</span></div></button><button type="button" class="day  ahead rise" style="--i:2" data-day="2"><div class="day-val flat"></div><div class="day-col"><div class="day-goal" style="--h:47%"></div><div class="day-bar flat" style="--h:0%;height:0%"></div></div><div class="day-lab"><b>WED</b><span>28/10</span></div></button><button type="button" class="day  ahead rise" style="--i:3" data-day="3"><div class="day-val flat"></div><div class="day-col"><div class="day-goal" style="--h:47%"></div><div class="day-bar flat" style="--h:0%;height:0%"></div></div><div class="day-lab"><b>THU</b><span>29/10</span></div></button><button type="button" class="day  ahead rise" style="--i:4" data-day="4"><div class="day-val flat"></div><div class="day-col"><div class="day-goal" style="--h:47%"></div><div class="day-bar flat" style="--h:0%;height:0%"></div></div><div class="day-lab"><b>FRI</b><span>30/10</span></div></button></div>
+    <div class="dd-wrap" id="jdetail"><div class="dd" data-dd="0" hidden><div class="dd-head"><b>MONDAY 26/10</b><span class="dd-amt num up">+2142.50 USD</span></div><div class="dd-sub">6 closed · 5 winners · 1 loser · target 1000 USD</div><ul class="dd-list"><li><span class="muted">19:38</span><b>XAUUSD</b><span class="up">+306.20</span></li><li><span class="muted">17:09</span><b>EURUSD</b><span class="up">+255.60</span></li><li><span class="muted">15:06</span><b>XAUUSD</b><span class="up">+592.50</span></li><li><span class="muted">13:32</span><b>EURUSD</b><span class="up">+592.50</span></li><li><span class="muted">11:32</span><b>EURUSD</b><span class="down">-196.80</span></li><li><span class="muted">09:35</span><b>XAUUSD</b><span class="up">+592.50</span></li></ul></div><div class="dd" data-dd="1" hidden><div class="dd-head"><b>TUESDAY 27/10</b><span class="dd-amt num flat">&mdash;</span></div><div class="dd-sub">upcoming day</div></div><div class="dd" data-dd="2" hidden><div class="dd-head"><b>WEDNESDAY 28/10</b><span class="dd-amt num flat">&mdash;</span></div><div class="dd-sub">upcoming day</div></div><div class="dd" data-dd="3" hidden><div class="dd-head"><b>THURSDAY 29/10</b><span class="dd-amt num flat">&mdash;</span></div><div class="dd-sub">upcoming day</div></div><div class="dd" data-dd="4" hidden><div class="dd-head"><b>FRIDAY 30/10</b><span class="dd-amt num flat">&mdash;</span></div><div class="dd-sub">upcoming day</div></div></div></div>
 </section>
 
 <section class="grid">
-  <div class="panel"><h3>TRADES CLÔTURÉS <em>semaine affichée</em></h3>
-    <ul class="trades" id="trades"><li class="rise" style="--i:0"><span class="muted">Mon 26/10  17:11</span><b>EURUSD</b><span class="up">+6.20</span></li><li class="rise" style="--i:1"><span class="muted">Mon 26/10  15:37</span><b>EURUSD</b><span class="up">+9.10</span></li><li class="rise" style="--i:2"><span class="muted">Mon 26/10  13:28</span><b>EURUSD</b><span class="up">+16.40</span></li><li class="rise" style="--i:3"><span class="muted">Mon 26/10  11:49</span><b>EURUSD</b><span class="down">-9.10</span></li><li class="rise" style="--i:4"><span class="muted">Mon 26/10  09:35</span><b>EURUSD</b><span class="up">+6.20</span></li></ul></div>
-  <div class="log"><h3>JOURNAL TEMPS RÉEL</h3><pre id="journal">[09:02:11] Cycle 14 — signal SELL retenu (ADX 27.4, ATR 0.00041)
-[09:02:12] Ordre envoye : EURUSD 0.04 lot @ 1.16089, SL 1.16149
-[09:28:03] TP1 touche, volume reduit de moitie, SL deplace au point mort
-[10:15:44] Cycle 15 — aucun signal, filtre de spread actif (1.8 pip)</pre></div>
+  <div class="panel"><h3>CLOSED TRADES <em>week shown</em></h3>
+    <ul class="trades" id="trades"><li class="rise" style="--i:0"><span class="muted">Mon 26/10  19:38</span><b>XAUUSD</b><span class="up">+306.20</span></li><li class="rise" style="--i:1"><span class="muted">Mon 26/10  17:09</span><b>EURUSD</b><span class="up">+255.60</span></li><li class="rise" style="--i:2"><span class="muted">Mon 26/10  15:06</span><b>XAUUSD</b><span class="up">+592.50</span></li><li class="rise" style="--i:3"><span class="muted">Mon 26/10  13:32</span><b>EURUSD</b><span class="up">+592.50</span></li><li class="rise" style="--i:4"><span class="muted">Mon 26/10  11:32</span><b>EURUSD</b><span class="down">-196.80</span></li><li class="rise" style="--i:5"><span class="muted">Mon 26/10  09:35</span><b>XAUUSD</b><span class="up">+592.50</span></li></ul></div>
+  <div class="log"><h3>LIVE LOG</h3><pre id="journal">[09:02:11] Cycle 14 - SELL signal accepted (ADX 27.4, ATR 0.00041)
+[09:02:12] Order sent: EURUSD 1.50 lots @ 1.16089, SL 1.16149
+[09:28:03] TP1 hit, volume halved, stop moved to break even
+[10:15:44] Cycle 15 - no signal, spread filter active (1.8 pip)
+[11:33:12] Cycle 16 - BUY signal accepted (ADX 31.2, ATR 0.00047)
+[12:15:40] TP3 hit, position fully closed, +735.20 USD</pre></div>
 </section>
 
 </div>

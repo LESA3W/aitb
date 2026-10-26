@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 980" width="1280" height="980">
+<defs>
+<marker id="ma855f7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#a855f7"/></marker>
+<marker id="m10b981" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#10b981"/></marker>
+<marker id="mf59e0b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#f59e0b"/></marker>
+<marker id="m3b82f6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3b82f6"/></marker>
+<marker id="m64748b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker>
+</defs>
+<rect width="1280" height="980" fill="#0b0f14"/>
+<text x="40" y="50" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="27" font-weight="800">A.I.T.B &#183; system architecture</text>
+<text x="40" y="76" fill="#8b98a8" font-family="Segoe UI,Arial,sans-serif" font-size="14">Offline research decides what to trade. The live loop only executes it.</text>
+<rect x="24" y="100" width="1232" height="180" rx="16" fill="#111823" stroke="#1b2534"/>
+<rect x="24" y="100" width="6" height="180" rx="3" fill="#a855f7"/>
+<text x="50" y="127" fill="#a855f7" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2.5">OFFLINE RESEARCH</text>
+<rect x="52" y="140" width="188" height="110" rx="12" fill="#0e1520" stroke="#a855f7" stroke-width="1.6"/>
+<rect x="52" y="140" width="188" height="4" rx="2" fill="#a855f7"/>
+<text x="146" y="172" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Market data</text>
+<text x="146" y="194" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">MT5 history</text>
+<text x="146" y="210" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">CSV cache</text>
+<rect x="300" y="140" width="188" height="110" rx="12" fill="#0e1520" stroke="#a855f7" stroke-width="1.6"/>
+<rect x="300" y="140" width="188" height="4" rx="2" fill="#a855f7"/>
+<text x="394" y="172" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Backtest engine</text>
+<text x="394" y="194" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">bar by bar</text>
+<text x="394" y="210" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">spread + fees</text>
+<rect x="548" y="140" width="188" height="110" rx="12" fill="#0e1520" stroke="#a855f7" stroke-width="1.6"/>
+<rect x="548" y="140" width="188" height="4" rx="2" fill="#a855f7"/>
+<text x="642" y="172" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Sweep</text>
+<text x="642" y="194" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">parameter grid</text>
+<text x="642" y="210" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">thousands of runs</text>
+<rect x="796" y="140" width="188" height="110" rx="12" fill="#0e1520" stroke="#a855f7" stroke-width="1.6"/>
+<rect x="796" y="140" width="188" height="4" rx="2" fill="#a855f7"/>
+<text x="890" y="172" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Walk forward</text>
+<text x="890" y="194" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">out of sample</text>
+<text x="890" y="210" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">vs random</text>
+<rect x="1044" y="140" width="188" height="110" rx="12" fill="#0e1520" stroke="#a855f7" stroke-width="1.6"/>
+<rect x="1044" y="140" width="188" height="4" rx="2" fill="#a855f7"/>
+<text x="1138" y="172" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Acceptance gate</text>
+<text x="1138" y="194" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">100+ trades, DD &lt; 20%</text>
+<text x="1138" y="210" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">PF &gt; 1.3, beats B&amp;H</text>
+<line x1="244" y1="195" x2="294" y2="195" stroke="#a855f7" stroke-width="2" marker-end="url(#ma855f7)"/>
+<line x1="492" y1="195" x2="542" y2="195" stroke="#a855f7" stroke-width="2" marker-end="url(#ma855f7)"/>
+<line x1="740" y1="195" x2="790" y2="195" stroke="#a855f7" stroke-width="2" marker-end="url(#ma855f7)"/>
+<line x1="988" y1="195" x2="1038" y2="195" stroke="#a855f7" stroke-width="2" marker-end="url(#ma855f7)"/>
+<rect x="440" y="306" width="400" height="48" rx="24" fill="#0e1520" stroke="#a855f7" stroke-width="1.8"/>
+<text x="640" y="336" text-anchor="middle" fill="#e6edf3" font-family="Consolas,monospace" font-size="14">config/settings.py &#183; LIVE_STRATEGY frozen</text>
+<line x1="1138" y1="250" x2="1138" y2="306" stroke="#a855f7" stroke-width="2" marker-end="url(#ma855f7)"/>
+<line x1="1138" y1="330" x2="846" y2="330" stroke="#a855f7" stroke-width="2" marker-end="url(#ma855f7)"/>
+<line x1="640" y1="356" x2="640" y2="400" stroke="#10b981" stroke-width="2" marker-end="url(#m10b981)"/>
+<rect x="24" y="382" width="1232" height="300" rx="16" fill="#111823" stroke="#1b2534"/>
+<rect x="24" y="382" width="6" height="300" rx="3" fill="#10b981"/>
+<text x="50" y="409" fill="#10b981" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2.5">LIVE LOOP &#183; deterministic, no LLM</text>
+<rect x="52" y="422" width="188" height="108" rx="12" fill="#0e1520" stroke="#10b981" stroke-width="1.6"/>
+<rect x="52" y="422" width="188" height="4" rx="2" fill="#10b981"/>
+<text x="146" y="454" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Market data</text>
+<text x="146" y="476" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">aitb/market_data</text>
+<text x="146" y="492" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">OHLC + tick</text>
+<rect x="300" y="422" width="188" height="108" rx="12" fill="#0e1520" stroke="#10b981" stroke-width="1.6"/>
+<rect x="300" y="422" width="188" height="4" rx="2" fill="#10b981"/>
+<text x="394" y="454" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Indicators</text>
+<text x="394" y="476" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">ATR, ADX, RSI</text>
+<text x="394" y="492" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">numpy only</text>
+<rect x="548" y="422" width="188" height="108" rx="12" fill="#0e1520" stroke="#10b981" stroke-width="1.6"/>
+<rect x="548" y="422" width="188" height="4" rx="2" fill="#10b981"/>
+<text x="642" y="454" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Strategy rule</text>
+<text x="642" y="476" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">aitb/strategies</text>
+<text x="642" y="492" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">BUY / SELL / none</text>
+<rect x="796" y="422" width="188" height="108" rx="12" fill="#0e1520" stroke="#10b981" stroke-width="1.6"/>
+<rect x="796" y="422" width="188" height="4" rx="2" fill="#10b981"/>
+<text x="890" y="454" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Filters</text>
+<text x="890" y="476" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">spread, session</text>
+<text x="890" y="492" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">ATR, cooldown</text>
+<rect x="1044" y="422" width="188" height="108" rx="12" fill="#0e1520" stroke="#10b981" stroke-width="1.6"/>
+<rect x="1044" y="422" width="188" height="4" rx="2" fill="#10b981"/>
+<text x="1138" y="454" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Risk manager</text>
+<text x="1138" y="476" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">lot from risk %</text>
+<text x="1138" y="492" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">volume clamp</text>
+<line x1="244" y1="476" x2="294" y2="476" stroke="#10b981" stroke-width="2" marker-end="url(#m10b981)"/>
+<line x1="492" y1="476" x2="542" y2="476" stroke="#10b981" stroke-width="2" marker-end="url(#m10b981)"/>
+<line x1="740" y1="476" x2="790" y2="476" stroke="#10b981" stroke-width="2" marker-end="url(#m10b981)"/>
+<line x1="988" y1="476" x2="1038" y2="476" stroke="#10b981" stroke-width="2" marker-end="url(#m10b981)"/>
+<rect x="176" y="560" width="188" height="100" rx="12" fill="#0e1520" stroke="#10b981" stroke-width="1.6"/>
+<rect x="176" y="560" width="188" height="4" rx="2" fill="#10b981"/>
+<text x="270" y="592" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Trade manager</text>
+<text x="270" y="614" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">order_send, IOC</text>
+<text x="270" y="630" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">SL + 3 take profits</text>
+<rect x="424" y="560" width="188" height="100" rx="12" fill="#0e1520" stroke="#10b981" stroke-width="1.6"/>
+<rect x="424" y="560" width="188" height="4" rx="2" fill="#10b981"/>
+<text x="518" y="592" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Multi-TP monitor</text>
+<text x="518" y="614" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">TP1 halves size</text>
+<text x="518" y="630" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">break even, trailing</text>
+<rect x="672" y="560" width="188" height="100" rx="12" fill="#0e1520" stroke="#10b981" stroke-width="1.6"/>
+<rect x="672" y="560" width="188" height="4" rx="2" fill="#10b981"/>
+<text x="766" y="592" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Logger</text>
+<text x="766" y="614" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">JSON per trade</text>
+<text x="766" y="630" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">HTML dashboard</text>
+<rect x="920" y="560" width="188" height="100" rx="12" fill="#0e1520" stroke="#3b82f6" stroke-width="1.6"/>
+<rect x="920" y="560" width="188" height="4" rx="2" fill="#3b82f6"/>
+<text x="1014" y="592" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Dashboards</text>
+<text x="1014" y="614" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">weekly + trades</text>
+<text x="1014" y="630" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">port 8080 / 8081</text>
+<line x1="368" y1="610" x2="418" y2="610" stroke="#10b981" stroke-width="2" marker-end="url(#m10b981)"/>
+<line x1="616" y1="610" x2="666" y2="610" stroke="#10b981" stroke-width="2" marker-end="url(#m10b981)"/>
+<line x1="864" y1="610" x2="914" y2="610" stroke="#10b981" stroke-width="2" marker-end="url(#m10b981)"/>
+<line x1="1138" y1="530" x2="1138" y2="542" stroke="#10b981" stroke-width="2" marker-end="url(#m10b981)"/>
+<path d="M1138 536 L1138 544 L262 544 L262 554" fill="none" stroke="#10b981" stroke-width="2" marker-end="url(#m10b981)"/>
+<rect x="24" y="700" width="1232" height="128" rx="16" fill="#111823" stroke="#1b2534"/>
+<rect x="24" y="700" width="6" height="128" rx="3" fill="#f59e0b"/>
+<text x="50" y="727" fill="#f59e0b" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2.5">GUARDS &#183; always on</text>
+<rect x="52" y="736" width="188" height="76" rx="12" fill="#0e1520" stroke="#f59e0b" stroke-width="1.6"/>
+<rect x="52" y="736" width="188" height="4" rx="2" fill="#f59e0b"/>
+<text x="146" y="768" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Preflight</text>
+<text x="146" y="790" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">checks before start</text>
+<rect x="300" y="736" width="188" height="76" rx="12" fill="#0e1520" stroke="#f59e0b" stroke-width="1.6"/>
+<rect x="300" y="736" width="188" height="4" rx="2" fill="#f59e0b"/>
+<text x="394" y="768" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Prop firm guard</text>
+<text x="394" y="790" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">stops, then closes</text>
+<line x1="394" y1="730" x2="394" y2="668" stroke="#f59e0b" stroke-width="2" marker-end="url(#mf59e0b)"/>
+<rect x="548" y="736" width="188" height="76" rx="12" fill="#0e1520" stroke="#f59e0b" stroke-width="1.6"/>
+<rect x="548" y="736" width="188" height="4" rx="2" fill="#f59e0b"/>
+<text x="642" y="768" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Watchdog</text>
+<text x="642" y="790" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">restarts the bot</text>
+<line x1="642" y1="730" x2="642" y2="668" stroke="#f59e0b" stroke-width="2" marker-end="url(#mf59e0b)"/>
+<rect x="796" y="736" width="188" height="76" rx="12" fill="#0e1520" stroke="#f59e0b" stroke-width="1.6"/>
+<rect x="796" y="736" width="188" height="4" rx="2" fill="#f59e0b"/>
+<text x="890" y="768" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Heartbeat</text>
+<text x="890" y="790" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">proves it is alive</text>
+<line x1="890" y1="730" x2="890" y2="668" stroke="#f59e0b" stroke-width="2" marker-end="url(#mf59e0b)"/>
+<rect x="1044" y="736" width="188" height="76" rx="12" fill="#0e1520" stroke="#f59e0b" stroke-width="1.6"/>
+<rect x="1044" y="736" width="188" height="4" rx="2" fill="#f59e0b"/>
+<text x="1138" y="768" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Control file</text>
+<text x="1138" y="790" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">ON / PAUSE / OFF</text>
+<line x1="1138" y1="730" x2="1138" y2="668" stroke="#f59e0b" stroke-width="2" marker-end="url(#mf59e0b)"/>
+<rect x="24" y="850" width="1232" height="118" rx="16" fill="#111823" stroke="#1b2534"/>
+<rect x="24" y="850" width="6" height="118" rx="3" fill="#64748b"/>
+<text x="50" y="877" fill="#64748b" font-family="Segoe UI,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2.5">LEGACY &#183; first generation, kept for the record</text>
+<rect x="52" y="886" width="188" height="68" rx="12" fill="#0e1520" stroke="#64748b" stroke-width="1.6" stroke-dasharray="6 5"/>
+<rect x="52" y="886" width="188" height="4" rx="2" fill="#64748b"/>
+<text x="146" y="918" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Screenshot</text>
+<text x="146" y="940" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">MT5 window</text>
+<rect x="300" y="886" width="188" height="68" rx="12" fill="#0e1520" stroke="#64748b" stroke-width="1.6" stroke-dasharray="6 5"/>
+<rect x="300" y="886" width="188" height="4" rx="2" fill="#64748b"/>
+<text x="394" y="918" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Mouse macro</text>
+<text x="394" y="940" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">paste into ChatGPT</text>
+<rect x="548" y="886" width="188" height="68" rx="12" fill="#0e1520" stroke="#64748b" stroke-width="1.6" stroke-dasharray="6 5"/>
+<rect x="548" y="886" width="188" height="4" rx="2" fill="#64748b"/>
+<text x="642" y="918" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">LLM answer</text>
+<text x="642" y="940" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">BUY / SELL / NOTHING</text>
+<rect x="796" y="886" width="188" height="68" rx="12" fill="#0e1520" stroke="#64748b" stroke-width="1.6" stroke-dasharray="6 5"/>
+<rect x="796" y="886" width="188" height="4" rx="2" fill="#64748b"/>
+<text x="890" y="918" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">OCR</text>
+<text x="890" y="940" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">Tesseract reads it</text>
+<rect x="1044" y="886" width="188" height="68" rx="12" fill="#0e1520" stroke="#64748b" stroke-width="1.6" stroke-dasharray="6 5"/>
+<rect x="1044" y="886" width="188" height="4" rx="2" fill="#64748b"/>
+<text x="1138" y="918" text-anchor="middle" fill="#e6edf3" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700">Execution</text>
+<text x="1138" y="940" text-anchor="middle" fill="#8b98a8" font-family="Consolas,monospace" font-size="11.5">not backtestable</text>
+<line x1="244" y1="920" x2="294" y2="920" stroke="#64748b" stroke-width="2" marker-end="url(#m64748b)" stroke-dasharray="5 5"/>
+<line x1="492" y1="920" x2="542" y2="920" stroke="#64748b" stroke-width="2" marker-end="url(#m64748b)" stroke-dasharray="5 5"/>
+<line x1="740" y1="920" x2="790" y2="920" stroke="#64748b" stroke-width="2" marker-end="url(#m64748b)" stroke-dasharray="5 5"/>
+<line x1="988" y1="920" x2="1038" y2="920" stroke="#64748b" stroke-width="2" marker-end="url(#m64748b)" stroke-dasharray="5 5"/>
+</svg>

@@ -1,151 +1,165 @@
 # A.I.T.B — Artificial Intelligence Trading Bot
 
-Bot de trading autonome sur MetaTrader 5, écrit en Python, avec moteur de backtest,
-garde-fou prop firm et tableaux de bord temps réel.
+An autonomous trading bot for MetaTrader 5, written in Python, with its own
+backtesting engine, a prop firm guard rail and real time dashboards.
 
-Le projet a connu deux générations. La première envoyait des captures d'écran de
-MetaTrader 5 à ChatGPT, lisait la réponse à l'écran par OCR et en tirait une décision
-BUY / SELL / NOTHING. La seconde a supprimé le LLM de la boucle live : une IA cherche
-des stratégies hors ligne et les backteste en masse, le bot n'exécute plus qu'une règle
-déterministe et figée. Le code des deux générations est ici, la première est marquée
-LEGACY.
+The project went through two generations. The first one sent MetaTrader 5
+screenshots to ChatGPT, read the answer off the screen with OCR and turned it
+into a BUY / SELL / NOTHING decision. The second one took the LLM out of the
+live loop: research happens offline, strategies are backtested in bulk, and the
+bot only executes a frozen deterministic rule. Both generations are in this
+repository, the first one marked LEGACY.
 
-> Dépôt public à titre de vitrine. Ce n'est pas un logiciel open source et ce n'est pas
-> un conseil en investissement. Voir [Licence](#licence) et [Avertissement](#avertissement).
-
----
-
-## Aperçu
-
-### Tableau de bord hebdomadaire
-
-Objectif du jour et de la semaine, marge restante avant les limites de la prop firm,
-positions ouvertes, détail jour par jour, journal du bot en direct.
-
-![Tableau de bord hebdomadaire](docs/images/dashboard-semaine.png)
-
-### Suivi des trades et du Multi-TP
-
-Un trade par ligne, du cycle de décision jusqu'à la clôture, avec les trois niveaux de
-take profit et le stop suivi en continu.
-
-![Suivi des trades](docs/images/dashboard-trades.png)
-
-Les deux captures sont générées à partir de **données fictives**, par
-`outils/apercu_demo.py` et `docs/exemples/dashboard_demo.html`. Aucun relevé de compte
-réel n'est publié ici.
+> Public as a showcase. This is not open source software and it is not
+> investment advice. See [License](#license) and [Disclaimer](#disclaimer).
 
 ---
 
-## Ce que fait le bot
+## Architecture
 
-| Étage | Rôle |
+![Architecture](docs/images/architecture.svg)
+
+The split is the whole point. Anything that needs judgement happens offline,
+where it can be measured. Anything that runs with money on the line is a rule
+that cannot change its mind.
+
+---
+
+## Screenshots
+
+### Weekly dashboard
+
+Daily and weekly targets, headroom left before the prop firm limits, open
+positions, a day by day breakdown and the live log of the bot.
+
+![Weekly dashboard](docs/images/dashboard-weekly.png)
+
+### Trade and Multi-TP tracking
+
+One row per trade, from the decision cycle through to the close, with the three
+take profit levels and the stop as it moved.
+
+![Trade dashboard](docs/images/dashboard-trades.png)
+
+### MetaTrader 5 terminal
+
+The bot drives a standard MT5 terminal through the official Python API. The
+charts here are an actual capture taken by the bot.
+
+![MetaTrader 5](docs/images/mt5-terminal.png)
+
+All three are rendered from **fictional data** by `tools/demo_preview.py`,
+`tools/demo_trades.py` and `tools/make_mt5_screenshot.py`. No real account
+statement, balance or trade history is published in this repository.
+
+---
+
+## What the bot does
+
+| Layer | Role |
 |---|---|
-| **Données de marché** | Lecture OHLC via l'API Python MT5, cache CSV local, aucun appel payant |
-| **Indicateurs** | SMA, EMA, RSI, ATR, ADX, Donchian, Bollinger, Keltner, MACD, en numpy pur |
-| **Stratégies** | Règles déterministes paramétrées, avec grilles pour le sweep |
-| **Backtest** | Moteur bougie par bougie, frais et spread inclus, métriques complètes |
-| **Recherche** | Sweep massif, walk forward, test de significativité contre le hasard |
-| **Exécution** | Envoi d'ordres MT5, gestion du filling mode, Multi-TP en thread séparé |
-| **Suivi** | Passage au point mort, trailing stop, détection de clôture, journal JSON |
-| **Risque** | Calcul du lot selon le risque en devise, filtres de spread, de session et d'ATR |
-| **Prop firm** | Garde-fou qui coupe les entrées puis ferme tout avant la limite de perte |
-| **Supervision** | Watchdog, heartbeat, préflight au démarrage, tableaux de bord HTTP |
+| **Market data** | OHLC through the MT5 Python API, local CSV cache, no paid feed |
+| **Indicators** | SMA, EMA, RSI, ATR, ADX, Donchian, Bollinger, Keltner, MACD, in pure numpy |
+| **Strategies** | Parameterised deterministic rules, with grids for the sweep |
+| **Backtest** | Bar by bar engine, spread and fees included, full metrics |
+| **Research** | Mass sweep, walk forward, significance testing against random entries |
+| **Execution** | MT5 order sending, filling mode handling, Multi-TP in its own thread |
+| **Monitoring** | Break even move, trailing stop, close detection, JSON journal |
+| **Risk** | Lot sizing from currency risk, spread, session and ATR filters |
+| **Prop firm** | Guard that stops new entries, then closes everything, before the limit |
+| **Supervision** | Watchdog, heartbeat, preflight checks, HTTP dashboards |
 
-### La grille d'acceptation
+### The acceptance gate
 
-Une stratégie n'a le droit de passer en forward test que si elle réunit les quatre
-conditions suivantes :
+A strategy is only allowed into forward testing if it clears all four of these:
 
-- au moins **100 trades** sur le backtest
-- **drawdown maximum inférieur à 20 %**
-- **profit factor supérieur à 1.3**
-- elle **bat le buy and hold** de l'instrument
+- at least **100 trades** in the backtest
+- **maximum drawdown under 20%**
+- **profit factor above 1.3**
+- it **beats buy and hold** on the same instrument
 
-Le win rate ne fait pas partie des critères. Une stratégie à 34 % de trades gagnants peut
-être excellente si le rapport gain sur perte est à l'endroit. Ces seuils viennent d'un
-retour d'expérience sur environ 2000 backtests, dont la grande majorité a échoué une fois
-en conditions réelles.
+Win rate is not one of the criteria. A strategy that wins 34% of its trades can
+be excellent if the ratio between wins and losses points the right way. These
+thresholds come out of roughly 2000 backtests, most of which failed once they
+met live conditions.
 
----
-
-## Arborescence
+## Layout
 
 ```
-aitb/                  coeur du bot
-  live.py              runner headless, stratégie déterministe
-  market_data.py       lecture OHLC MT5 + cache CSV
-  indicators.py        indicateurs techniques en numpy pur
-  strategies.py        stratégies et grilles de paramètres
-  backtest.py          moteur de backtest
-  trade_manager.py     envoi d'ordres, filling mode, thread Multi-TP
-  monitor.py           point mort, trailing, détection de clôture
-  logger.py            journal JSON et génération du dashboard HTML
-  risk_manager.py      calcul du lot et validation du volume
-  filters.py           filtres de spread, de session, d'ATR, de cooldown
-  propfirm_guard.py    garde-fou de la prop firm
-  preflight.py         vérifications au démarrage
-  watchdog.py          redémarrage automatique
-  arb_*.py, okx.py     branche crypto, arbitrage de financement
-  main.py              LEGACY, capture d'écran MT5 et exécution
-  scheduler.py         LEGACY, boucle de cycles
-  read_chatgpt_output.py  LEGACY, macro souris et OCR Tesseract
-config/settings.py     configuration centrale
-research/              sweep, walk forward, Monte Carlo, liquidité, funding
-utils/                 journalisation horodatée, couleurs, bannière
-outils/                scripts de test et de diagnostic, hors production
-scripts/               fichiers .bat du poste de travail Windows
-serveur/               variante serveur : dashboard, envoi, tâches planifiées
-docs/                  architecture détaillée, captures, exemples
-dashboard.py           tableau de bord hebdomadaire, port 8080
-dashboard_crypto.py    tableau de bord de la branche crypto, port 8081
-run.py                 point d'entrée du bot
+aitb/                  bot core
+  live.py              headless runner, deterministic strategy
+  market_data.py       MT5 OHLC reads and CSV cache
+  indicators.py        technical indicators, pure numpy
+  strategies.py        strategies and parameter grids
+  backtest.py          backtesting engine
+  trade_manager.py     order sending, filling mode, Multi-TP thread
+  monitor.py           break even, trailing, close detection
+  logger.py            JSON journal and HTML dashboard generation
+  risk_manager.py      lot sizing and volume validation
+  filters.py           spread, session, ATR and cooldown filters
+  propfirm_guard.py    prop firm guard rail
+  preflight.py         start up checks
+  watchdog.py          automatic restart
+  arb_*.py, okx.py     crypto branch, funding rate arbitrage
+  main.py              LEGACY, MT5 screenshot and execution
+  scheduler.py         LEGACY, cycle loop
+  read_chatgpt_output.py  LEGACY, mouse macro and Tesseract OCR
+config/settings.py     central configuration
+research/              sweep, walk forward, Monte Carlo, liquidity, funding
+utils/                 timestamped logging, colors, banner
+tools/                 test and diagnostic scripts, plus the doc generators
+scripts/               Windows workstation .bat files
+server/                server variant: dashboard, push, scheduled tasks
+docs/                  detailed architecture, images, examples
+dashboard.py           weekly dashboard, port 8080
+dashboard_crypto.py    crypto branch dashboard, port 8081
+run.py                 bot entry point
 ```
 
 ## Stack
 
-Python 3.12, MetaTrader 5 (API Python), numpy, pandas, pytesseract et Tesseract OCR
-(branche LEGACY), pyautogui et pywin32 (branche LEGACY), `http.server` pour les
-tableaux de bord, HTML / CSS / JavaScript sans aucune dépendance front.
+Python 3.12, MetaTrader 5 (Python API), numpy, pandas, pytesseract and
+Tesseract OCR (LEGACY branch), pyautogui and pywin32 (LEGACY branch),
+`http.server` for the dashboards, plain HTML, CSS and JavaScript with no front
+end dependency at all.
 
 ## Documentation
 
-[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) est le document de référence du projet :
-chaque module, chaque fichier de configuration, chaque piège rencontré et la raison des
-choix. C'est le fichier que je lis en premier quand je reprends le code après deux
-semaines d'absence.
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) is the reference document for the
+project: every module, every configuration file, every trap hit along the way
+and the reasoning behind the choices. It is written in French, and it is the
+file I read first whenever I come back to the code after two weeks away.
 
-Quelques enseignements qui y sont consignés :
+A few of the lessons recorded in it:
 
-- les comptes RAW d'IC Markets refusent le filling mode FOK et exigent IOC
-- les restrictions de volume dépendent du solde du compte, pas seulement du levier
-- une sortie console bavarde rend le bot inutilisable, seuls les événements significatifs
-  méritent une ligne
-- un système Multi-TP a besoin de drapeaux d'état explicites, sinon l'affichage ment
-- un LLM dans la boucle live n'est pas backtestable, puisqu'il ne répond jamais deux fois
-  la même chose
+- IC Markets RAW accounts reject the FOK filling mode and require IOC
+- volume restrictions depend on account balance, not just on leverage
+- a chatty console makes the bot unusable, only meaningful events deserve a line
+- a Multi-TP system needs explicit state flags, otherwise the display lies
+- an LLM inside the live loop cannot be backtested, since it never answers the
+  same thing twice
 
-## Ce que ce dépôt ne contient pas
+## What this repository does not contain
 
-Volontairement retirés avant publication :
+Deliberately stripped before publishing:
 
-- identifiants et mots de passe de courtier, fichiers `.env`, jetons d'envoi
-- numéros de compte, adresses du réseau privé, URL de déploiement
-- historiques de marché téléchargés, environ 1 Go de CSV régénérables avec
+- broker credentials and passwords, `.env` files, deployment tokens
+- account numbers, private network addresses, deployment URLs
+- downloaded market history, about 1 GB of CSV, regenerable with
   `research/sweep.py --download`
-- journaux de trading réels, captures d'écran de sessions, profil de navigateur
-- environnement virtuel et caches
+- real trading journals, session screenshots, browser profile
+- virtual environment and caches
 
-Le dépôt n'est donc pas exécutable tel quel. Il est là pour être lu.
+The repository is therefore not runnable as is. It is here to be read.
 
-## Licence
+## License
 
-Tous droits réservés. Le code est rendu **visible**, pas réutilisable : aucune licence
-open source n'est accordée, ni pour la copie, ni pour la modification, ni pour un usage
-commercial ou personnel.
+All rights reserved. The code is made **visible**, not reusable: no open source
+license is granted, for copying, for modification, or for commercial or
+personal use.
 
-## Avertissement
+## Disclaimer
 
-Le trading sur marge comporte un risque de perte élevé. Ce dépôt documente un projet
-personnel d'ingénierie, il ne constitue ni un conseil en investissement, ni une promesse
-de performance, ni une invitation à reproduire la démarche avec de l'argent réel.
+Margin trading carries a high risk of loss. This repository documents a personal
+engineering project. It is not investment advice, not a performance claim, and
+not an invitation to reproduce any of it with real money.
